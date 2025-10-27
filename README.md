@@ -25,6 +25,37 @@ The system is **user-friendly**, **modular**, and **scalable**, ensuring long-te
 - ✅ To improve operational efficiency by reducing paperwork, enhancing customer service, and automating administrative tasks.  
 
 ---
+## 📂 Project Structure
+
+```
+mainproj/
+├── entities/              # Entity classes (Customer, Vehicle, BaseEntity)
+├── exceptions/           # Custom exception classes
+├── interfaces/           # Interface definitions
+├── utils/               # Utility classes
+├── database/            # Database connection classes
+├── lib/                 # External libraries (MySQL Connector)
+├── Login.java           # Main entry point (Login screen)
+├── MainDashboard.java   # Main dashboard after login
+├── Appointments.java    # Appointment management
+├── AccessInformation.java  # Information access module
+├── ViewAllInformation.java # View all records
+├── RepairStatus.java    # Repair status management
+├── GenerateBill.java    # Bill generation
+├── RepairShopApp.java   # Legacy application
+├── UIStyle.java         # UI styling utilities
+└── DatabaseConnection.java # Database connection utility
+```
+
+## 📝 Key Classes
+
+- **Login.java**: Authentication and login functionality
+- **MainDashboard.java**: Main application dashboard
+- **DatabaseConnection.java**: Database connection management
+- **Customer.java**: Customer entity
+- **Vehicle.java**: Vehicle entity
+- **Appointments.java**: Appointment management
+- **GenerateBill.java**: Bill generation and printing
 
 ## 🧰 **Software Stack Used**
 
@@ -64,6 +95,151 @@ The system is **user-friendly**, **modular**, and **scalable**, ensuring long-te
 | <img width="1378" height="278" alt="image" src="https://github.com/user-attachments/assets/45688323-080c-4c32-b875-0e1a022d6391" /> | Appointments SQL Tables |
 
 ---
+
+
+## 📋 Prerequisites
+
+Before running this project, ensure you have the following installed:
+
+1. **Java Development Kit (JDK)** - Version 8 or higher
+   - Download from: https://www.oracle.com/java/technologies/downloads/
+   - Verify installation: `java -version`
+
+2. **MySQL Database Server** - Version 5.7 or higher
+   - Download from: https://dev.mysql.com/downloads/mysql/
+   - During installation, remember your MySQL root password (default is often empty or "root")
+
+3. **MySQL Connector/J** - Already included in `lib/mysql-connector-j-9.0.0.jar`
+
+## 📥 Installation
+
+### Step 1: Clone the Repository
+
+Open your terminal or command prompt and run:
+
+```bash
+git clone https://github.com/yourusername/repair-shop-management.git
+cd repair-shop-management/mainproj/mainproj
+```
+
+**Note**: Replace `yourusername` with your actual GitHub username.
+
+### Step 2: Set Up the Database
+
+1. **Start MySQL Server**
+   - On Windows: MySQL should start automatically after installation
+   - You can also start it manually from Services
+
+2. **Open MySQL Command Line or MySQL Workbench**
+
+3. **Create the Database and Tables**
+
+   Run the SQL script located at the root of the project:
+   
+   ```bash
+   # Navigate to the project root directory
+   cd D:\Aooproject
+   
+   # Run the SQL script (replace with your MySQL credentials)
+   mysql -u root -p < schema.sql
+   ```
+   
+   Or manually:
+   ```sql
+   -- In MySQL Workbench or Command Line, execute:
+   mysql -u root -p
+   -- Enter your password when prompted
+   -- Then paste the contents of schema.sql
+   ```
+
+4. **Create a Test User**
+
+   You need to create at least one user account to log in. Run the following SQL:
+   
+   ```sql
+   USE repairshop;
+   
+   INSERT INTO users (username, password, role) 
+   VALUES ('admin', 'admin123', 'ADMIN');
+   
+   INSERT INTO users (username, password, role) 
+   VALUES ('staff', 'staff123', 'STAFF');
+   ```
+
+### Step 3: Verify Database Configuration
+
+The application connects to MySQL with these credentials:
+- **Database URL**: `jdbc:mysql://127.0.0.1:3306/repairshop`
+- **Username**: `root`
+- **Password**: `root`
+
+**Important**: If your MySQL root password is different, you need to update the credentials in:
+- `DatabaseConnection.java` (line 10-11)
+- `database/EnhancedDatabaseConnection.java` (line 16-17)
+
+Change these lines:
+```java
+private static final String USERNAME = "root";  // Your MySQL username
+private static final String PASSWORD = "your_password";  // Your MySQL password
+```
+
+## ▶️ Running the Application
+
+### Method 1: Using IDE (Recommended)
+
+1. **Open the project in your IDE** (Eclipse, IntelliJ IDEA, or NetBeans)
+
+2. **Add MySQL Connector JAR to classpath**:
+   - Right-click on the project
+   - Go to Build Path → Configure Build Path
+   - Click "Add External JARs"
+   - Navigate to `lib/mysql-connector-j-9.0.0.jar`
+   - Click OK
+
+3. **Run the application**:
+   - Locate `Login.java` in your project
+   - Right-click on `Login.java`
+   - Select "Run As" → "Java Application"
+
+### Method 2: Using Command Line
+
+```bash
+# Navigate to the project directory
+cd mainproj/mainproj
+
+# Compile all Java files
+javac -cp .;lib/mysql-connector-j-9.0.0.jar *.java entities/*.java exceptions/*.java interfaces/*.java utils/*.java database/*.java
+
+# Run the application
+java -cp .;lib/mysql-connector-j-9.0.0.jar Login
+```
+
+**For Linux/Mac**, use `:` instead of `;`:
+```bash
+javac -cp .:lib/mysql-connector-j-9.0.0.jar *.java entities/*.java exceptions/*.java interfaces/*.java utils/*.java database/*.java
+java -cp .:lib/mysql-connector-j-9.0.0.jar Login
+```
+
+### Method 3: Using JAR File (If Available)
+
+```bash
+java -jar RepairShopApp.jar
+```
+
+## 🔑 Login Credentials
+
+After setting up the database with the test users, you can log in with:
+
+### Admin Account:
+- **Username**: `admin`
+- **Password**: `admin123`
+- **Role**: ADMIN
+
+### Staff Account:
+- **Username**: `staff`
+- **Password**: `staff123`
+- **Role**: STAFF
+
 
 ## 📚 **Conclusion**
 
