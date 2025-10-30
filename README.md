@@ -74,7 +74,61 @@ mainproj/
 - **JDBC (Java Database Connectivity)** using MySQL Connector  
 
 ---
+## 🎯 OOP Features with Exact Locations
 
+- **Exception Handling**
+  - `mainproj/mainproj/Login.java` lines 84–111: Try/catch around DB login with user-friendly error.
+  - `mainproj/mainproj/RepairShopApp.java` lines 191–201, 205–217, 268–279: Try-with-resources for JDBC CRUD operations and UI error dialogs.
+  - `mainproj/mainproj/database/EnhancedDatabaseConnection.java` lines 47–63: Exceptions wrapped into custom `DatabaseConnectionException`.
+  - `mainproj/mainproj/database/EnhancedDatabaseConnection.java` lines 108–115: Centralized error handling in `getConnectionWithErrorHandling`.
+
+- **Interfaces**
+  - `mainproj/mainproj/interfaces/IDatabaseOperations.java` lines 11–31: Contract for DB operations.
+  - `mainproj/mainproj/database/EnhancedDatabaseConnection.java` line 14: Implements `IDatabaseOperations`.
+  - `mainproj/mainproj/interfaces/IValidatable.java` lines 7–24: Validation contract used by entities.
+  - `mainproj/mainproj/entities/BaseEntity.java` line 11: Implements `IValidatable`.
+  - `mainproj/mainproj/interfaces/IStringProcessor.java` lines 7–27: String processing contract.
+  - `mainproj/mainproj/utils/StringUtils.java` line 10: Implements `IStringProcessor`.
+
+- **Packages**
+  - `package` declarations at line 1 of: `entities/*`, `exceptions/*`, `interfaces/*`, `utils/*`, `database/*`.
+
+- **String Handling Functions**
+  - `mainproj/mainproj/utils/StringUtils.java` lines 24–31: `formatString`
+  - `mainproj/mainproj/utils/StringUtils.java` lines 48–54: `sanitizeString`
+  - `mainproj/mainproj/utils/StringUtils.java` lines 99–116: `toProperCase`
+  - `mainproj/mainproj/utils/StringUtils.java` lines 124–131: `truncateString`
+  - `mainproj/mainproj/utils/StringUtils.java` lines 61–67: `isValidPhoneNumber`
+  - `mainproj/mainproj/utils/StringUtils.java` lines 74–79: `isValidEmail`
+  - `mainproj/mainproj/utils/StringUtils.java` lines 86–92: `isValidLicensePlate`
+  - Usage in entities:
+    - `mainproj/mainproj/entities/Customer.java` lines 74–76: Validate/format name via `StringUtils`.
+    - `mainproj/mainproj/entities/Vehicle.java` lines 98–103, 118–126: Validate/format model and plate.
+
+- **Constructors**
+  - `mainproj/mainproj/entities/BaseEntity.java` lines 19–23, 29–33, 40–44: Overloaded base constructors.
+  - `mainproj/mainproj/entities/Customer.java` lines 18–23, 29–34, 41–46, 54–59: Overloaded constructors.
+  - `mainproj/mainproj/entities/Vehicle.java` lines 19–25, 32–38, 46–52, 61–67: Overloaded constructors.
+  - `mainproj/mainproj/exceptions/DatabaseConnectionException.java` lines 14–17, 24–27, 35–38: Overloaded exception constructors.
+
+- **Inheritance**
+  - `mainproj/mainproj/entities/Customer.java` line 10: `Customer extends BaseEntity`.
+  - `mainproj/mainproj/entities/Vehicle.java` line 10: `Vehicle extends BaseEntity`.
+  - `mainproj/mainproj/entities/BaseEntity.java` line 11: Base abstract class for entities.
+
+- **Method Overloading**
+  - `mainproj/mainproj/database/EnhancedDatabaseConnection.java` lines 164–181: `getConnection(int maxRetries)`.
+  - `mainproj/mainproj/database/EnhancedDatabaseConnection.java` lines 189–200: `getConnectionWithTimeout(int timeoutSeconds)`.
+  - `mainproj/mainproj/entities/Customer.java` lines 150–161: `createCustomer(...)` overloads.
+  - `mainproj/mainproj/entities/Vehicle.java` lines 192–205: `createVehicle(...)` overloads.
+
+- **Method Overriding**
+  - `mainproj/mainproj/entities/Customer.java` lines 103–117, 125–128, 135–142: Overrides `isValid`, `getDisplayName`, `toString`.
+  - `mainproj/mainproj/entities/Vehicle.java` lines 133–158, 165–168, 175–183: Overrides `isValid`, `getDisplayName`, `toString`.
+  - `mainproj/mainproj/database/EnhancedDatabaseConnection.java` lines 47–63, 70–80, 88–101: Implements/overrides interface methods.
+
+Notes:
+- If a concept isn't listed above for a file, it isn’t used there.
 ## 🖼️ **GUI Design**
 
 | Screenshot | Description |
